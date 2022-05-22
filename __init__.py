@@ -15,16 +15,20 @@ def replace_variables(elements):
             ele.firstChild.replaceWholeText(variables[ele.firstChild.nodeValue])
             print(ele.firstChild.nodeValue)
 
+def compute_string(number):
+    value = number
+    offset = ""
+    if value < 100:
+        offset = "00" if number < 10 else "0"
+    return f"Nº {offset}{value}"
+
 def custom_callback(index):
     number = index + 1
-    offset = "" 
-    if number < 100:
-        offset = "00" if number < 10 else "0"
-    variables["#num_ticket1"]=f"Nº {offset}{number + 0 + number*5 - 1*index}" 
-    variables["#num_ticket2"]=f"Nº {offset}{number + 1 + number*5 - 1*index}"
-    variables["#num_ticket3"]=f"Nº {offset}{number + 2 + number*5 - 1*index}"
-    variables["#num_ticket4"]=f"Nº {offset}{number + 3 + number*5 - 1*index}"
-    variables["#num_ticket5"]=f"Nº {offset}{number + 4 + number*5 - 1*index}"
+    variables["#num_ticket1"]=f"{compute_string(number + 0 + number*5 - 1*index)}" 
+    variables["#num_ticket2"]=f"{compute_string(number + 1 + number*5 - 1*index)}"
+    variables["#num_ticket3"]=f"{compute_string(number + 2 + number*5 - 1*index)}"
+    variables["#num_ticket4"]=f"{compute_string(number + 3 + number*5 - 1*index)}"
+    variables["#num_ticket5"]=f"{compute_string(number + 4 + number*5 - 1*index)}"
 
 def main(total_of_files):
     for i in range(total_of_files):
@@ -46,6 +50,6 @@ def test():
         xmldoc.writexml(file)
 
 if __name__ == "__main__":
-    main(44)
+    main(int(525/5))
         
     
